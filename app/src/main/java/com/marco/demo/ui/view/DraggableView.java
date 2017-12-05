@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 /**
+ * 官方的SlidingPaneLayout和DrawerLayout都是利用ViewDragHelper实现的。
+ *
  * @author yangbo
  */
 
@@ -34,7 +36,7 @@ public class DraggableView extends LinearLayout {
         public void onViewReleased(View releasedChild, float xvel, float yvel) {
             Log.i(TAG, "onViewReleased: xvel = " + xvel + " , yvel = " + yvel);
             if (releasedChild == mAutoBackView) {
-                if (mAutoBackLastPos.x < getMeasuredWidth() / 2) {
+                if (mAutoBackLastPos.x < (getMeasuredWidth() - mAutoBackView.getMeasuredWidth()) / 2) {
                     mAutoBackLastPos.x = mAutoBackOriginPos.x;
                 } else {
                     mAutoBackLastPos.x = getMeasuredWidth() - mAutoBackView.getMeasuredWidth() - mAutoBackOriginPos.x;
@@ -77,6 +79,7 @@ public class DraggableView extends LinearLayout {
 
             mAutoBackLastPos.x = left;
             return left;
+//            return Math.max(left, 0);
         }
 
         @Override
@@ -93,6 +96,9 @@ public class DraggableView extends LinearLayout {
 
             mAutoBackLastPos.y = top;
             return top;
+
+            // 不能滑出顶部
+//            return Math.max(top, 0);
         }
     };
 
@@ -118,6 +124,8 @@ public class DraggableView extends LinearLayout {
 
     @Override
     public void computeScroll() {
+        // 重写了computeScroll 方法，以便在手指松开时，触发系统自动滑动
+
         // 不添加这个方法，自动复位到指定位置无法使用
         if (mViewDragHelper.continueSettling(true)) {
             invalidate();
