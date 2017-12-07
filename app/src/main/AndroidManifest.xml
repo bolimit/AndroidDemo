@@ -25,8 +25,16 @@
             android:name=".ui.SampleRemoteServiceActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.MessengerServiceActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name=".service.SampleRemoteService"
+            android:process=":remote" />
+
+        <service
+            android:name=".service.MessengerService"
             android:process=":remote" />
     </application>
 
