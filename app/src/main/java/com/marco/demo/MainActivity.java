@@ -6,6 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.marco.demo.ui.SampleRemoteServiceActivity;
 import com.marco.demo.ui.ViewDragHelperActivity;
 import com.marco.demo.ui.adapter.MainAdapter;
 
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
 
         mActionMap = new HashMap<>(10);
         mActionMap.put(Integer.valueOf(0), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
-        mActionMap.put(Integer.valueOf(1), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
+        mActionMap.put(Integer.valueOf(1), new ActionDisplayPair("SampleRemoteService Demo", SampleRemoteServiceActivity.class));
         mActionMap.put(Integer.valueOf(2), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
         mActionMap.put(Integer.valueOf(3), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
         mActionMap.put(Integer.valueOf(4), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
@@ -60,16 +61,8 @@ public class MainActivity extends Activity {
             return title;
         }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
         public Class getCls() {
             return cls;
-        }
-
-        public void setCls(Class cls) {
-            this.cls = cls;
         }
     }
 }

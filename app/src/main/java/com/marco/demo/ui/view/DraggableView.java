@@ -3,6 +3,7 @@ package com.marco.demo.ui.view;
 import android.content.Context;
 import android.graphics.Point;
 import android.support.annotation.Nullable;
+import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -118,7 +119,7 @@ public class DraggableView extends LinearLayout {
     }
 
     private void initView() {
-        mViewDragHelper = ViewDragHelper.create(DraggableView.this, mCallback);
+        mViewDragHelper = ViewDragHelper.create(DraggableView.this, 1.0f, mCallback);
         mViewDragHelper.setEdgeTrackingEnabled(ViewDragHelper.EDGE_ALL);
     }
 
@@ -128,7 +129,8 @@ public class DraggableView extends LinearLayout {
 
         // 不添加这个方法，自动复位到指定位置无法使用
         if (mViewDragHelper.continueSettling(true)) {
-            invalidate();
+//            invalidate();
+            ViewCompat.postInvalidateOnAnimation(this);
         }
     }
 

@@ -20,6 +20,14 @@
         <activity
             android:name=".ui.ViewDragHelperActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.SampleRemoteServiceActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name=".service.SampleRemoteService"
+            android:process=":remote" />
     </application>
 
 </manifest>
