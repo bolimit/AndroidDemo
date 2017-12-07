@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.Process;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -37,7 +38,7 @@ public class SampleRemoteServiceActivity extends Activity implements View.OnClic
     private ISampleRemoteServiceCallback mCallback = new ISampleRemoteServiceCallback.Stub() {
         @Override
         public void onValueChanged(int value) throws RemoteException {
-            Log.i(TAG, "SampleRemoteServiceActivity -> onValueChanged responsed, value is: " + value);
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "SampleRemoteServiceActivity -> onValueChanged responsed, value is: " + value);
             mInfoText.setText("Callback received, value is " + value);
         }
     };
@@ -54,7 +55,7 @@ public class SampleRemoteServiceActivity extends Activity implements View.OnClic
     private ServiceConnection mConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder binder) {
-            Log.i(TAG, "SampleRemoteServiceActivity -> onServiceConnected");
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "SampleRemoteServiceActivity -> onServiceConnected");
 
             mInfoText.setText("Service Connected!");
             try {
@@ -74,7 +75,7 @@ public class SampleRemoteServiceActivity extends Activity implements View.OnClic
          */
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            Log.i(TAG, "SampleRemoteServiceActivity -> onServiceDisconnected");
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "SampleRemoteServiceActivity -> onServiceDisconnected");
             mInfoText.setText("Service Disconnected!");
             disConnectService();
         }

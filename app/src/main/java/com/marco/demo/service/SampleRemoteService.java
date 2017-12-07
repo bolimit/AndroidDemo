@@ -29,7 +29,7 @@ public class SampleRemoteService extends Service {
 
         @Override
         public void registerCallback(ISampleRemoteServiceCallback callback) throws RemoteException {
-            Log.i(TAG, "registerCallback");
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "registerCallback");
             if (callback != null) {
                 mCallBacks.register(callback);
             }
@@ -37,7 +37,7 @@ public class SampleRemoteService extends Service {
 
         @Override
         public void unregisterCallback(ISampleRemoteServiceCallback callback) throws RemoteException {
-            Log.i(TAG, "unregisterCallback");
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "unregisterCallback");
             if (callback != null) {
                 mCallBacks.unregister(callback);
             }
@@ -45,14 +45,14 @@ public class SampleRemoteService extends Service {
 
         @Override
         public void runShadowSocks(Config config) throws RemoteException {
-            Log.i(TAG, "runShadowSocks: num in Config is : " + config.getNum());
+            Log.i(TAG, "Process:" + Process.myPid() + " , " + "runShadowSocks: num in Config is : " + config.getNum());
             notifyCallBack(config);
         }
     };
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "onCreate");
+        Log.i(TAG, "Process:" + Process.myPid() + " , " + "onCreate");
         super.onCreate();
     }
 
@@ -63,20 +63,20 @@ public class SampleRemoteService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.i(TAG, "onBind");
+        Log.i(TAG, "Process:" + Process.myPid() + " , " + "onBind");
         return mBinder;
     }
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy");
+        Log.i(TAG, "Process:" + Process.myPid() + " , " + "onDestroy");
         mCallBacks.kill();
     }
 
     private void notifyCallBack(Config config) {
         int size = mCallBacks.beginBroadcast();
 
-        Log.i(TAG, "notifyCallBack, size is :" + size);
+        Log.i(TAG, "Process:" + Process.myPid() + " , " + "notifyCallBack, size is :" + size);
 
         for (int i = 0; i < size; i++) {
             try {
