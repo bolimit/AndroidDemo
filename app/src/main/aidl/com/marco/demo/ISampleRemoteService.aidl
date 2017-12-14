@@ -6,11 +6,11 @@ import com.marco.demo.model.Config;
 // Declare any non-default types here with import statements
 
 interface ISampleRemoteService {
-    int getState();
+    int getStateInSeparateProcessAction();
 
     oneway void registerCallback(in ISampleRemoteServiceCallback callback);
 
     oneway void unregisterCallback(in ISampleRemoteServiceCallback callback);
 
-    oneway void runShadowSocks(in Config config);
+    oneway void callInSeparateProcessAction(in Config config);
 }

@@ -37,7 +37,7 @@ public class SampleRemoteServiceActivity extends Activity implements View.OnClic
     private boolean isBound = false;
     private ISampleRemoteServiceCallback mCallback = new ISampleRemoteServiceCallback.Stub() {
         @Override
-        public void onValueChanged(int value) throws RemoteException {
+        public void onCallbackInUIProcess(int value) throws RemoteException {
             Log.i(TAG, "Process:" + Process.myPid() + " , " + "SampleRemoteServiceActivity -> onValueChanged responsed, value is: " + value);
             mInfoText.setText("Callback received, value is " + value);
         }
@@ -147,7 +147,7 @@ public class SampleRemoteServiceActivity extends Activity implements View.OnClic
         Config config = new Config();
         config.setNum(15);
         try {
-            mRemoteService.runShadowSocks(config);
+            mRemoteService.callInSeparateProcessAction(config);
         } catch (RemoteException e) {
             e.printStackTrace();
         }

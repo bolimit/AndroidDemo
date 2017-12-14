@@ -23,7 +23,7 @@ public class SampleRemoteService extends Service {
 
     private final ISampleRemoteService.Stub mBinder = new ISampleRemoteService.Stub() {
         @Override
-        public int getState() throws RemoteException {
+        public int getStateInSeparateProcessAction() throws RemoteException {
             return Process.myPid();
         }
 
@@ -44,7 +44,7 @@ public class SampleRemoteService extends Service {
         }
 
         @Override
-        public void runShadowSocks(Config config) throws RemoteException {
+        public void callInSeparateProcessAction(Config config) throws RemoteException {
             Log.i(TAG, "Process:" + Process.myPid() + " , " + "runShadowSocks: num in Config is : " + config.getNum());
             notifyCallBack(config);
         }
@@ -80,7 +80,7 @@ public class SampleRemoteService extends Service {
 
         for (int i = 0; i < size; i++) {
             try {
-                mCallBacks.getBroadcastItem(i).onValueChanged(config.getNum());
+                mCallBacks.getBroadcastItem(i).onCallbackInUIProcess(config.getNum());
             } catch (RemoteException e) {
                 e.printStackTrace();
             }

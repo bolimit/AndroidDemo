@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by yangbo on 2017/12/7.
+ * @author yangbo
  */
 
 public class MessengerService extends Service {
