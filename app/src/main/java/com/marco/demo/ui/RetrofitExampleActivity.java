@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.marco.demo.R;
 
@@ -42,10 +43,10 @@ public class RetrofitExampleActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                // 设置拦截器
+                // 设置拦截器-注意：日志拦截器中无法获取之后在拦截器添加的header信息
                 OkHttpClient httpClient = new OkHttpClient.Builder()
+                        .addInterceptor(new HeaderInterceptor())
                         .addInterceptor(new LoggingInterceptor())
-                        .addInterceptor(new HeadInterceptor())
                         .build();
                 Retrofit retrofit = new Retrofit.Builder()
                         .baseUrl("https://api.github.com/")
@@ -84,10 +85,13 @@ public class RetrofitExampleActivity extends Activity {
         Call<ResponseBody> listRepos(@Path("user") String user, @Query("name") String name);
     }
 
-    class HeadInterceptor implements Interceptor {
+    class HeaderInterceptor implements Interceptor {
 
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
+
+            Log.i(TAG, "HeaderInterceptor -> intercept");
+
             Request originalRequest = chain.request();
             Request.Builder builder = originalRequest.newBuilder();
             builder.header("appid", "1");
@@ -105,11 +109,18 @@ public class RetrofitExampleActivity extends Activity {
     class LoggingInterceptor implements Interceptor {
         @Override
         public okhttp3.Response intercept(Chain chain) throws IOException {
-            Request request = chain.request();
+            Log.i(TAG, "LoggingInterceptor -> intercept");
+
+            final Request request = chain.request();
 
             long t1 = System.nanoTime();
             // 备注：拦截后的url是带query参数的
-
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ((TextView) findViewById(R.id.text_info)).setText(request.url().toString());
+                }
+            });
             Log.i(TAG, String.format("Sending request %s on %s%n%s",
                     request.url(), chain.connection(), request.headers()));
 
