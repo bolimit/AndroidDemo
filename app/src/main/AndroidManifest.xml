@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,6 +37,14 @@
             android:name=".ui.RetrofitExampleActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ui.SohuEntryTestActivity"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".ui.RecyclerViewActivity"
+            android:screenOrientation="portrait"></activity>
+
         <service
             android:name=".service.SampleRemoteService"
             android:process=":remote" />
@@ -42,6 +52,15 @@
         <service
             android:name=".service.MessengerService"
             android:process=":remote" />
+
+        <receiver
+            android:name=".service.SohuEntryService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="sohuvideo" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
