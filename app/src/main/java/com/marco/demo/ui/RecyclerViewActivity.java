@@ -62,6 +62,7 @@ public class RecyclerViewActivity extends Activity {
                  * 	0（SCROLL_STATE_IDLE）表示recyclerview是不动的,
                  1（SCROLL_STATE_DRAGGING）表示recyclerview正在被拖拽
                  2（SCROLL_STATE_SETTLING）表示recyclerview正在惯性下滚动
+                 曝光监测只需要统计手势拖动，惯性下滑只需要等滑动停止时一起计算
                  */
                 super.onScrollStateChanged(recyclerView, newState);
                 Log.i(TAG, "onScrollStateChanged : " + newState);
@@ -75,6 +76,8 @@ public class RecyclerViewActivity extends Activity {
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 Log.i(TAG, "onScrolled : " + dx + "," + dy);
+
+                Log.i(TAG, "onScrolled, ChildCount : " + mRecyclerView.getChildCount());
             }
         });
 

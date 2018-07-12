@@ -3,6 +3,8 @@
     package="com.marco.demo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -44,6 +46,19 @@
         <activity
             android:name=".ui.RecyclerViewActivity"
             android:screenOrientation="portrait"></activity>
+
+        <service
+            android:name=".service.ActivatorService"
+            android:process=":activator"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="action.cmd"
+                    android:scheme="sohutest" />
+            </intent-filter>
+        </service>
 
         <service
             android:name=".service.SampleRemoteService"

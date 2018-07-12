@@ -20,7 +20,7 @@ import java.util.List;
 
 public abstract class SystemLifecycleCallbacks implements Application.ActivityLifecycleCallbacks {
     // 通过判断LaunchActivity的Intent是否还有startType的值，来判断是否是点击Launcher启动
-    public static final String LAUNCH_ACTIVITY_START_TYPE_KEY = "startType";
+    public static final String LAUNCH_ACTIVITY_START_TYPE_KEY = "com.sohu.sohuvideo.startType";
     public static final String LAUNCH_ACTIVITY_START_TYPE_VALUE = "not_launch_system";
     private static final long ONE_HOUR = 60 * 60 * 1000L;
     private static final long ONE_MONTH = 30 * 24 * 60 * 60 * 1000L;
@@ -98,9 +98,23 @@ public abstract class SystemLifecycleCallbacks implements Application.ActivityLi
             // 判断是否是点击Launcher启动
             if (activity instanceof LaunchActivity) {
                 Intent intent = activity.getIntent();
-                String stringExtra = intent.getStringExtra(LAUNCH_ACTIVITY_START_TYPE_KEY);
+                String stringExtra = "";
+                //bugly-bug 增加try-catch https://bugly.qq.com/v2/crash-reporting/crashes/900057815/12475?pid=1
+                try {
+                    stringExtra = intent.getStringExtra(LAUNCH_ACTIVITY_START_TYPE_KEY);
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                }
+                final long millisPassed = mAppBackTime != 0 ? mAppForeTime - mAppBackTime : 0;
+
                 if (!LAUNCH_ACTIVITY_START_TYPE_VALUE.equals(stringExtra)) {
                     onLauncherStarted();
+                    if (isMainActivityInTasks(activity) && !(millisPassed >= ONE_HOUR && millisPassed <= ONE_MONTH)
+                            && !activity.isTaskRoot() && (Intent.ACTION_MAIN.equals(intent.getAction()))) { //intent.hasCategory(Intent.CATEGORY_LAUNCHER) &&
+                        // 满足条件1.MainActivity在栈中 2.不在重新展示启动图时间段内 3.启动页activity不在栈根部 时直接finish
+                        Log.d(TAG, "GAOFENG---onActivityStarted: FirstNavigationActivityGroup finish!!!!!!");
+                        activity.finish();
+                    }
                 }
             } else {
                 // 在else可排除在启动页重复拉起启动页的情况
