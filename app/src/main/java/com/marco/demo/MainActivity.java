@@ -6,7 +6,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.marco.demo.service.MessengerService;
+import com.marco.demo.ui.ActionProtocolSenderActivity;
 import com.marco.demo.ui.MessengerServiceActivity;
 import com.marco.demo.ui.RecyclerViewActivity;
 import com.marco.demo.ui.RetrofitExampleActivity;
@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
         mActionMap.put(Integer.valueOf(4), new ActionDisplayPair("ViewDragHelper Demo", ViewDragHelperActivity.class));
         mActionMap.put(Integer.valueOf(5), new ActionDisplayPair("SohuEntry Demo", SohuEntryTestActivity.class));
         mActionMap.put(Integer.valueOf(6), new ActionDisplayPair("RecyclerView Demo", RecyclerViewActivity.class));
+        mActionMap.put(Integer.valueOf(7), new ActionDisplayPair("Action Protocol Demo", ActionProtocolSenderActivity.class));
 
 
         mAdapter = new MainAdapter(MainActivity.this, mActionMap);

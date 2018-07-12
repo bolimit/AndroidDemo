@@ -47,10 +47,14 @@
             android:name=".ui.RecyclerViewActivity"
             android:screenOrientation="portrait"></activity>
 
+        <activity
+            android:name=".ui.ActionProtocolSenderActivity"
+            android:screenOrientation="portrait"></activity>
+
         <service
             android:name=".service.ActivatorService"
-            android:process=":activator"
-            android:exported="true">
+            android:exported="true"
+            android:process=":activator">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
