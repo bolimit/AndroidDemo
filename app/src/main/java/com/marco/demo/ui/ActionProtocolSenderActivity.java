@@ -86,8 +86,9 @@ public class ActionProtocolSenderActivity extends Activity implements View.OnCli
     }
 
     private void sendActivityAction1() {
+        String url = "sohuvideo://action.cmd?action=1.33&enterid=sogou_app";
         Intent intent = new Intent(Intent.ACTION_DEFAULT);
-        intent.setData(Uri.parse(ACTION_URL_1));
+        intent.setData(Uri.parse(url));
         if (IntentTools.isActivityIntentAvailable(ActionProtocolSenderActivity.this, intent)) {
             startActivity(intent);
         }
@@ -109,8 +110,9 @@ public class ActionProtocolSenderActivity extends Activity implements View.OnCli
     }
 
     private void sendServiceAction3() {
+        String url = "svaction://action.cmd?openservice://open_refer=sogou_app";
         Intent intent = new Intent(Intent.ACTION_DEFAULT);
-        intent.setData(Uri.parse(ACTION_URL_3));
+        intent.setData(Uri.parse(url));
         if (IntentTools.checkServiceIntentAvailableWithPackageName(this, intent, "com.sohu.sohuvideo")) {
             Intent newIntent = getExplicitIntent(this, intent);
             if (newIntent != null) {
