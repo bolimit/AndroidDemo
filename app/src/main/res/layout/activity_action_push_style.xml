@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.marco.demo.ui.SampleRemoteServiceActivity">
+
+    <TextView
+        android:id="@+id/push_text0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#8800ff00"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="EMUI，MIUI" />
+
+    <TextView
+        android:id="@+id/push_text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#8800ff00"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="最普通的样式" />
+
+    <Button
+        android:id="@+id/push_btn1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Normal Notification" />
+
+    <TextView
+        android:id="@+id/push_text2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#8800ff00"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="BigPictureStyle" />
+
+    <Button
+        android:id="@+id/push_btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BigPictureStyle Notification" />
+
+    <TextView
+        android:id="@+id/push_text3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="#8800ff00"
+        android:clickable="true"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="RemoteView Style" />
+
+    <Button
+        android:id="@+id/push_btn3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RemoteView Notification" />
+
+</LinearLayout>

@@ -50,6 +50,9 @@
         <activity
             android:name=".ui.ActionProtocolSenderActivity"
             android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ui.PushStyleActivity"
+            android:screenOrientation="portrait"></activity>
 
         <service
             android:name=".service.ActivatorService"

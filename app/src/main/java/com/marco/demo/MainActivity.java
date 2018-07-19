@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.marco.demo.ui.ActionProtocolSenderActivity;
 import com.marco.demo.ui.MessengerServiceActivity;
+import com.marco.demo.ui.PushStyleActivity;
 import com.marco.demo.ui.RecyclerViewActivity;
 import com.marco.demo.ui.RetrofitExampleActivity;
 import com.marco.demo.ui.SampleRemoteServiceActivity;
@@ -47,7 +48,7 @@ public class MainActivity extends Activity {
         mActionMap.put(Integer.valueOf(5), new ActionDisplayPair("SohuEntry Demo", SohuEntryTestActivity.class));
         mActionMap.put(Integer.valueOf(6), new ActionDisplayPair("RecyclerView Demo", RecyclerViewActivity.class));
         mActionMap.put(Integer.valueOf(7), new ActionDisplayPair("Action Protocol Demo", ActionProtocolSenderActivity.class));
-
+        mActionMap.put(Integer.valueOf(8), new ActionDisplayPair("Push Style Demo", PushStyleActivity.class));
 
         mAdapter = new MainAdapter(MainActivity.this, mActionMap);
         mRecyclerView.setAdapter(mAdapter);
