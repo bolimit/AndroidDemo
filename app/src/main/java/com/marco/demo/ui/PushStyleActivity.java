@@ -24,6 +24,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * @author boyang116245@sohu-inc.com
@@ -36,6 +39,11 @@ public class PushStyleActivity extends Activity implements View.OnClickListener 
     private Button button1, button2, button3;
     private TextView textView0, textView1, textView2, textView3;
 
+    private String getTime() {
+        SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.SIMPLIFIED_CHINESE);
+        return format.format(new Date());
+    }
+
     @TargetApi(16)
     public void sendResidentNotice(Context context, String title, String content) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
@@ -44,13 +52,14 @@ public class PushStyleActivity extends Activity implements View.OnClickListener 
         builder.setPriority(NotificationCompat.PRIORITY_MAX);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.notification_push_img);
         remoteViews.setTextViewText(R.id.tv_title, title);
+        remoteViews.setTextViewText(R.id.tv_time, getTime());
         remoteViews.setTextViewText(R.id.tv_des, content);
         remoteViews.setImageViewBitmap(R.id.iv_img, BitmapFactory.decodeResource(getResources(), R.drawable.img14481));
         Intent intent = new Intent(context, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         int requestCode = (int) SystemClock.uptimeMillis();
         PendingIntent pendingIntent = PendingIntent.getActivity(context, requestCode, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        remoteViews.setOnClickPendingIntent(R.id.notice_view_type_0, pendingIntent);
+        remoteViews.setOnClickPendingIntent(R.id.notice_view_bottom, pendingIntent);
         builder.setSmallIcon(R.mipmap.notify_5);
 
 
@@ -156,7 +165,7 @@ public class PushStyleActivity extends Activity implements View.OnClickListener 
             }
 
             case R.id.push_btn3: {
-                sendResidentNotice(this, "Test", "TestContent");
+                sendResidentNotice(this, "会员买一送一疯抢中", "【VIP暑期钜惠】7月20-22日，仅限3天！【VIP暑期钜惠】7月20-22日，仅限3天！【VIP暑期钜惠】7月20-22日，仅限3天！");
                 break;
             }
         }
